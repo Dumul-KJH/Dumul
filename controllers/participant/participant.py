@@ -50,9 +50,9 @@ class Dumul (Robot):
             self.detect_fall()
             if self.getTime() >= 1 and self.getTime() < 40:
                self.library.play('SideStepLeft')
-            if self.getTime() >= 41 and self.getTime() < 60:
+            if self.getTime() >= 41 and self.getTime() < 80:
                self.library.play('Forwards')
-            if self.getTime() >= 60 and self.getTime() < 100:
+            if self.getTime() >= 80 and self.getTime() < 160:
                self.library.play('SideStepRight')    
             
 

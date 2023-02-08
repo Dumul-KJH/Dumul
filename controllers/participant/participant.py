@@ -23,16 +23,20 @@ sys.path.append('..')
 from utils.motion_library import MotionLibrary
 
 
-class Wrestler (Robot):
+class Dumul (Robot):
+    def __init__(self):
+        super().__init__()
+        self.library = MotionLibrary()
+        #self.RShoulderPitch = self.getDevice("RShoulderPitch")
+        #self.LShoulderPitch = self.getDevice("LShoulderPitch")
+         
     def run(self):
-        # to load all the motions from the motions folder, we use the MotionLibrary class:
-        motion_library = MotionLibrary()
-        # retrieves the WorldInfo.basicTimeTime (ms) from the world file
+        
         time_step = int(self.getBasicTimeStep())
         while self.step(time_step) != -1:  # mandatory function to make the simulation run
-            motion_library.play('TaiChi')
-
+            if self.getTime() == 1:
+               self.library.play('SideStepLeft')
 
 # create the Robot instance and run main loop
-wrestler = Wrestler()
+wrestler = Dumul()
 wrestler.run()

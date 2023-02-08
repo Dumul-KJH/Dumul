@@ -21,19 +21,33 @@ import sys
 # If you want to see a list of examples that use them, you can go to https://github.com/cyberbotics/wrestling#demo-robot-controllers
 sys.path.append('..')
 from utils.motion_library import MotionLibrary
-
+from utils.accelerometer import Accelerometer
 
 class Dumul (Robot):
     def __init__(self):
         super().__init__()
+        self.time_step = int(self.getBasicTimeStep())
         self.library = MotionLibrary()
-        #self.RShoulderPitch = self.getDevice("RShoulderPitch")
-        #self.LShoulderPitch = self.getDevice("LShoulderPitch")
+        self.accelerometer = Accelerometer(self, self.time_step)
+        self.RShoulderRoll = self.getDevice("RShoulderRoll")
+        self.LShoulderRoll = self.getDevice("LShoulderRoll")
+      
+    def detect_fall(self):
+        [acc_x, acc_y, _] = self.accelerometer.get_new_average()
+        if acc_x < -7:
+            self.library.play('GetUpFront')
+        elif acc_x > 7:
+            self.library.play('GetUpBack')
+        if acc_y < -7:
+            # Fell to its right, pushing itself on its back
+            self.RShoulderRoll.setPosition(-1.2)
+        elif acc_y > 7:
+            # Fell to its left, pushing itself on its back
+            self.LShoulderRoll.setPosition(1.2)
          
     def run(self):
-        
-        time_step = int(self.getBasicTimeStep())
-        while self.step(time_step) != -1:  # mandatory function to make the simulation run
+        while self.step(self.time_step) != -1:  # mandatory function to make the simulation run
+            self.detect_fall()
             if self.getTime() >= 1 and self.getTime() < 40:
                self.library.play('SideStepLeft')
             if self.getTime() >= 41 and self.getTime() < 60:

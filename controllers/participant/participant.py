@@ -34,12 +34,17 @@ class Dumul (Robot):
         
         time_step = int(self.getBasicTimeStep())
         while self.step(time_step) != -1:  # mandatory function to make the simulation run
-            if self.getTime() >= 1 and self.getTime() < 35:
+            if self.getTime() >= 1 and self.getTime() < 40:
                self.library.play('SideStepLeft')
-            if self.getTime() == 35:
+            if self.getTime() == 41:
                self.library.play('Forwards50')
                self.library.play('Forwards50')
-               self.library.play('SideStepRightLoop')
+               self.library.play('Forwards50')
+               self.library.play('Forwards50')
+            if self.getTime() >= 60 and self.getTime() < 100:
+               self.library.play('SideStepRight')    
+            
+
 
 # create the Robot instance and run main loop
 wrestler = Dumul()

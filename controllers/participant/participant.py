@@ -48,11 +48,11 @@ class Dumul (Robot):
     def run(self):
         while self.step(self.time_step) != -1:  # mandatory function to make the simulation run
             self.detect_fall()
-            if self.getTime() >= 1 and self.getTime() < 40:
+            if self.getTime() >= 1 and self.getTime() < 45:
                self.library.play('SideStepLeft')
-            if self.getTime() >= 41 and self.getTime() < 80:
+            if self.getTime() >= 45 and self.getTime() < 95:
                self.library.play('Forwards')
-            if self.getTime() >= 80 and self.getTime() < 160:
+            if self.getTime() >= 95 and self.getTime() < 195:
                self.library.play('SideStepRight')    
             
 

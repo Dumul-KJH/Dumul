@@ -1,5 +1,6 @@
 {
   "name": "Dumul",
   "description": "Description of my robot controller program.",
-  "country": "KR"
+  "country": "KR",
+  "programming": "Python"
 }
